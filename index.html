@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarefas</title>
+</head>
+<body>
+    <h1>Lista de tarefas</h1>
+    <br>
+  <div id="listaTarefas">
+  </div>
+
+  <script>
+
+    fetch('http://localhost:3000/tarefas')
+      .then(response => response.json())
+      .then(data => {
+
+        let divTarefas = document.getElementById("listaTarefas");
+
+        data.forEach(tarefa => {
+          let tarefaDiv = document.createElement("div");
+          tarefaDiv.innerHTML = `
+            <h3>${tarefa.descricao}</h3>
+            <p>Data Criada: ${tarefa.data_criacao}</p>
+            <p>Data Prevista: ${tarefa.data_prevista}</p>
+            <p>Situação: ${tarefa.situacao}</p>
+          `;
+          divTarefas.appendChild(tarefaDiv);
+        });
+      })
+      .catch(error => console.error('Erro ao carregar as tarefas:', error));
+  </script>
+</body>
+</html>
