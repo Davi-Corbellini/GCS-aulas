@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login</title>
+  <style>
+    body {
+      background-color: #f6f8fa;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2c3e50;
+    }
+
+    .login-container label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      background-color: #2ecc71;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background-color: #27ae60;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="login-form">
+        <label for="usuario">Usuário</label>
+        <input type="text" id="usuario" name="usuario" required />
+      
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required />
+      
+        <button type="submit">Entrar</button>
+      </form>
+      
+  </div>
+
+  <script>
+    
+
+  document.getElementById('login-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById('usuario').value;
+  const senha = document.getElementById('senha').value;
+
+  const resposta = await fetch('http://localhost:3000/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nome, senha })
+  });
+
+  if (resposta.ok) {
+    window.location.href = 'index.html'; // redireciona para a lista de tarefas
+  } else {
+    const erro = await resposta.json();
+    alert(erro.erro || 'Erro no login');
+  }
+});
+
+  </script>
+</body>
+</html>
