@@ -1,18 +1,28 @@
 const express = require('express');
 const cors = require('cors');
-const app = express();
+const path = require('path');
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
+// 🔹 Servir arquivos estáticos da mesma pasta
+app.use(express.static(__dirname));
+
+// 🔹 Opcional: redireciona raiz "/" para index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// 🔹 Rotas da API (deixe por último)
 const tarefaRoutes = require('./tarefaRoutes.js');
 app.use('/', tarefaRoutes);
 
-// Só roda o servidor se não estiver em modo de teste (quando o arquivo for importado)
+// 🔹 Inicializa o servidor
 if (require.main === module) {
   const PORT = 3000;
   app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
+    console.log(`Servidor rodando em http://localhost:${PORT}`);
   });
 }
 
