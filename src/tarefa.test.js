@@ -151,8 +151,8 @@ test('11. Filtrar tarefas por situação (GET /tarefas?filtro=concluida)', async
   });
 
   afterAll(() => {
-    if (server) server.close();
     if (connection) connection.end();
+    if (server) server.close();
   });
   
 
