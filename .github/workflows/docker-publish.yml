@@ -27,8 +27,6 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_USER: root
-          MYSQL_PASSWORD: 1404
           MYSQL_ROOT_PASSWORD: 1404
           MYSQL_DATABASE: gcs
         ports:
