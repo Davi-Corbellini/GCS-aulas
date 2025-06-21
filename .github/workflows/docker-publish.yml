@@ -6,8 +6,6 @@ name: Docker
 # documentation.
 
 on:
-  schedule:
-    - cron: '26 3 * * *'
   push:
     branches: [ "main" ]
     # Publish semver tags as releases.
@@ -23,8 +21,52 @@ env:
 
 
 jobs:
-  build:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: test_password
+          MYSQL_DATABASE: test_db
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping --silent" --health-interval=10s --health-timeout=5s --health-retries=3
 
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Run Liquibase migrations
+        run: |
+          wget -O liquibase.tar.gz "https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz"
+          tar -xzf liquibase.tar.gz
+          ./liquibase/liquibase \
+            --changeLogFile=db/changelog/db.changelog-master.xml \
+            --url=jdbc:mysql://localhost:3306/test_db \
+            --username=root \
+            --password=test_password \
+            --classpath=./liquibase/lib/mysql-connector-java.jar \
+            update
+      
+      - name: Run tests
+        run: npm test
+        env:
+          DB_HOST: localhost
+          DB_PORT: 3306
+          DB_NAME: test_db
+          DB_USER: root
+          DB_PASSWORD: test_password
+
+  build:
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       contents: read
