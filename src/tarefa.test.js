@@ -1,6 +1,8 @@
 // tarefa.test.js
 const request = require('supertest');
-const app = require('./index');
+const {app, server} = require('./index');
+const connection = require('./db');
+
 
 describe('Testes Simples - API de Tarefas', () => {
   test('1. Listar tarefas (GET /tarefas)', async () => {
@@ -145,8 +147,14 @@ test('11. Filtrar tarefas por situação (GET /tarefas?filtro=concluida)', async
     const res = await request(app).get('/tarefas');
     const duracao = Date.now() - inicio;
     expect(duracao).toBeLessThan(1000);
+    
   });
 
+  afterAll(() => {
+    if (server) server.close();
+    if (connection) connection.end();
+  });
+  
 
 });
 
