@@ -63,8 +63,8 @@ jobs:
             update
       
       - name: Run tests
-        # run: npm test
-        run: npx jest --watch --runInBand --detectOpenHandles --forceExit
+        run: npm test -- --watch --runInBand --detectOpenHandles --forceExit
+        # run: npx jest --watch --runInBand --detectOpenHandles --forceExit
         env:
           HOST: localhost
           PORT: 3306
