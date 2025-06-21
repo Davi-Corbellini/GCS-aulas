@@ -53,6 +53,7 @@ jobs:
           tar -xzvf liquibase.tar.gz --directory ./liquibase/
           tar -xzvf mysql-connector.tar.gz --directory ./mysql-connector/
           ls -la
+          ls -la ./mysql-connector/
           ./liquibase/liquibase \
             --changeLogFile=db/changelog/db.changelog-master.xml \
             --url=jdbc:mysql://localhost:3306/test_db \
