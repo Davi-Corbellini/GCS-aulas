@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <!-- Changeset para criação da tabela tarefa -->
+    <changeSet id="1-create-tarefa-table" author="eduardo">
+        <createTable tableName="tarefa">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="descricao" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_criacao" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_prevista" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data_encerramento" type="DATETIME"/>
+            <column name="situacao" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <rollback>
+            <dropTable tableName="tarefa"/>
+        </rollback>
+    </changeSet>
+
+    <!-- Changeset para criação da tabela usuario -->
+    <changeSet id="2-create-usuario-table" author="eduardo">
+        <createTable tableName="usuario">
+            <column name="id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="VARCHAR(100)"/>
+            <column name="senha" type="VARCHAR(100)"/>
+        </createTable>
+        <rollback>
+            <dropTable tableName="usuario"/>
+        </rollback>
+    </changeSet>
+
+    <!-- Changeset para inserir dados na tabela usuario -->
+    <changeSet id="3-insert-usuario" author="eduardo">
+        <insert tableName="usuario">
+            <column name="id" valueNumeric="1"/>
+            <column name="nome" value="davi"/>
+            <column name="senha" value="123"/>
+        </insert>
+        <rollback>
+            <delete tableName="usuario">
+                <where>id = 1</where>
+            </delete>
+        </rollback>
+    </changeSet>
+</databaseChangeLog>
