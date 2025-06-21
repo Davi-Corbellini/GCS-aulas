@@ -18,7 +18,7 @@ async function enviarEmail(tarefa, acao) {
 
   try {
     const info = await transporter.sendMail(mailOptions);
-    console.log('Email enviado: ', info.response);
+    //console.log('Email enviado: ', info.response);
   } catch (erro) {
     console.error('Erro ao enviar email:', erro);
   }
