@@ -47,15 +47,18 @@ jobs:
       - name: Run Liquibase migrations
         run: |
           wget -O liquibase.tar.gz "https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz"
+          wget -0 mysql-connector.tar.gz "https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j-8.0.33.tar.gz"
           mkdir liquibase
-          tar -xzvf liquibase.tar.gz --directory ./liquibase/          
+          mkdir mysql-connector
+          tar -xzvf liquibase.tar.gz --directory ./liquibase/
+          tar -xzvf mysql-connector.tar.gz --directory ./mysql-connector/
           ls -la
           ./liquibase/liquibase \
             --changeLogFile=db/changelog/db.changelog-master.xml \
             --url=jdbc:mysql://localhost:3306/test_db \
             --username=root \
             --password=test_password \
-            --classpath=./liquibase/lib/mysql-connector-java.jar \
+            --classpath=./mysql-connector/mysql-connector-j-8.0.33.jar \
             update
       
       - name: Run tests
