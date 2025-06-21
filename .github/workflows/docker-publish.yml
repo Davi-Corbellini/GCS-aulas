@@ -47,15 +47,15 @@ jobs:
       - name: Run Liquibase migrations
         run: |
           wget -O liquibase.tar.gz "https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz"
-          tar -xzvf liquibase.tar.gz
-          pwd
+          mkdir liquibase
+          tar -xzvf liquibase.tar.gz --directory ./liquibase/          
           ls -la
-          ./liquibase-4.20.0/liquibase \
+          ./liquibase/liquibase \
             --changeLogFile=db/changelog/db.changelog-master.xml \
             --url=jdbc:mysql://localhost:3306/test_db \
             --username=root \
             --password=test_password \
-            --classpath=./liquibase-4.20.0/lib/mysql-connector-java.jar \
+            --classpath=./liquibase/lib/mysql-connector-java.jar \
             update
       
       - name: Run tests
