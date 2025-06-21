@@ -47,7 +47,7 @@ jobs:
       - name: Run Liquibase migrations
         run: |
           wget -O liquibase.tar.gz "https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz"
-          wget -0 mysql-connector.tar.gz "https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j-8.0.33.tar.gz"
+          wget -O mysql-connector.tar.gz "https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j-8.0.33.tar.gz"
           mkdir liquibase
           mkdir mysql-connector
           tar -xzvf liquibase.tar.gz --directory ./liquibase/
