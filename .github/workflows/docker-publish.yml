@@ -48,6 +48,8 @@ jobs:
         run: |
           wget -O liquibase.tar.gz "https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz"
           tar -xzvf liquibase.tar.gz
+          pwd
+          ls -la ./liquibase-4.20.0/
           ./liquibase-4.20.0/liquibase \
             --changeLogFile=db/changelog/db.changelog-master.xml \
             --url=jdbc:mysql://localhost:3306/test_db \
