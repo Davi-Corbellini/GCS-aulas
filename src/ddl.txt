@@ -1,0 +1,18 @@
+CREATE TABLE tarefa (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(255) NOT NULL,
+    data_criacao DATETIME NOT NULL,
+    data_prevista DATETIME NOT NULL,
+    data_encerramento DATETIME DEFAULT NULL,
+    situacao VARCHAR(50) NOT NULL
+);
+
+
+CREATE TABLE usuario (
+    id INT,
+    nome VARCHAR(100),
+    senha VARCHAR(100)
+);
+
+
+INSERT INTO usuario (id, nome, senha) VALUES (1, 'davi', '123');
