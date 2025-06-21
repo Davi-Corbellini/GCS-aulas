@@ -58,7 +58,7 @@ jobs:
             --username=root \
             --password=test_password \
             --classpath=./mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar \
-            --searchPath="db/changelog/"
+            --searchPath="db/changelog/" \
             update
       
       - name: Run tests
