@@ -49,8 +49,8 @@ jobs:
           wget -nv -O liquibase.tar.gz "https://github.com/liquibase/liquibase/releases/download/v4.20.0/liquibase-4.20.0.tar.gz"
           wget -nv -O mysql-connector.tar.gz "https://downloads.mysql.com/archives/get/p/3/file/mysql-connector-j-8.0.33.tar.gz"
           mkdir liquibase
-          tar -xzvf liquibase.tar.gz --directory ./liquibase/
-          tar -xzvf mysql-connector.tar.gz
+          tar -xzf liquibase.tar.gz --directory ./liquibase/
+          tar -xzf mysql-connector.tar.gz
           ls -la
           ./liquibase/liquibase \
             --changeLogFile=db/changelog/db.changelog-master.xml \
@@ -58,6 +58,7 @@ jobs:
             --username=root \
             --password=test_password \
             --classpath=./mysql-connector-j-8.0.33/mysql-connector-j-8.0.33.jar \
+            --searchPath="db/changelog/"
             update
       
       - name: Run tests
