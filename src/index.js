@@ -50,7 +50,7 @@ app.use('/', tarefaRoutes);
 let server = null;
 if (require.main === module) {
   //const PORT = 3000;
-  server = app.listen(PORT, () => {
+  server = app.listen(process.env.PORT, () => {
     console.log(`Servidor rodando em http://${process.env.HOST}:${process.env.PORT}`);
   });
 }
