@@ -13,6 +13,7 @@
     "dotenv": "^16.5.0",
     "emailjs-com": "^3.2.0",
     "express": "^4.21.2",
+    "liquibase": "^4.28.1",
     "mysql2": "^3.14.0",
     "nodemailer": "^7.0.2"
   },
