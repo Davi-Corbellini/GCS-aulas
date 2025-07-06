@@ -116,7 +116,7 @@ async function exportarPDF() {
 
   async function carregarTarefas() {
   try {
-    const resposta = await fetch("http://localhost:3000/tarefas");
+    const resposta = await fetch("http://150.136.168.160:3001/tarefas");
     const tarefas = await resposta.json();
     const tbody = document.querySelector("#tabelaTarefas tbody");
     tbody.innerHTML = ""; // limpa tabela atual
