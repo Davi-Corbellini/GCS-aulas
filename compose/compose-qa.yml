@@ -1,0 +1,33 @@
+services:
+  gcs-aulas:
+    command:
+      - "/bin/sh"
+      - "-c"
+      - "node src/index.js"
+    container_name: "gcs-aulas"
+    entrypoint:
+      - "docker-entrypoint.sh"
+    environment:
+      - "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      - "NODE_ENV=qa"
+      - HOST=
+      - DATABASE=
+      - USER=
+      - PASSWORD=
+    image: "ghcr.io/davi-corbellini/gcs-aulas:latest"
+    ipc: "private"
+    labels:
+      org.opencontainers.image.description: "Repositório para fazer atividades da disciplina GCS"
+      org.opencontainers.image.source: "https://github.com/Davi-Corbellini/GCS-aulas"
+      org.opencontainers.image.title: "GCS-aulas"
+      org.opencontainers.image.url: "https://github.com/Davi-Corbellini/GCS-aulas"
+    logging:
+      driver: "json-file"
+      options: {}
+    network_mode: "bridge"
+    ports:
+      - "3002:3000/tcp"
+    user: "node"
+    working_dir: "/usr/src/app"
+
+version: "3.6"
