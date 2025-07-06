@@ -116,7 +116,7 @@ async function exportarPDF() {
 
   async function carregarTarefas() {
   try {
-    const resposta = await fetch("http://150.136.168.160:3001/tarefas");
+    const resposta = await fetch(`http://${process.env.HOST}:${process.env.PORT}/tarefas`);
     const tarefas = await resposta.json();
     const tbody = document.querySelector("#tabelaTarefas tbody");
     tbody.innerHTML = ""; // limpa tabela atual
@@ -162,7 +162,7 @@ const confirmar = confirm(`Tem certeza que deseja excluir a tarefa ${id}?`);
 if (!confirmar) return;
 
 try {
-  const resposta = await fetch(`http://localhost:3000/tarefas/${id}`, {
+  const resposta = await fetch(`http://${process.env.HOST}:${process.env.PORT}/tarefas/${id}`, {
     method: 'DELETE'
   });
 
@@ -195,7 +195,7 @@ const situacao = document.getElementById("situacao").value;
 // Adiciona hora para se adequar ao tipo DATETIME do MySQL
 const data_prevista = `${dataInput} 00:00:00`;
 
-const resposta = await fetch('http://localhost:3000/tarefas', {
+const resposta = await fetch(`http://${process.env.HOST}:${process.env.PORT}/tarefas`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -245,7 +245,7 @@ async function obterTarefaPorId(id) {
   try {
     console.log("ID da tarefa no fetch:", id);
 
-    const resposta = await fetch(`http://localhost:3000/tarefas/${id}`);
+    const resposta = await fetch(`http://${process.env.HOST}:${process.env.PORT}/tarefas/${id}`);
     console.log(resposta)
 
     if (!resposta.ok) {
@@ -268,7 +268,7 @@ async function salvarEdicao() {
   const dataPrevista = document.getElementById("data-prevista-edicao").value;
   const situacao = document.getElementById("situacao-edicao").value;
 
-  const resposta = await fetch(`http://localhost:3000/tarefas/${tarefaAtualId}`, {
+  const resposta = await fetch(`http://${process.env.HOST}:${process.env.PORT}/tarefas/${tarefaAtualId}`, {
     method: 'PUT',  // Usamos PUT para edição
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ descricao, data_prevista: dataPrevista, situacao })

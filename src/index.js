@@ -49,9 +49,9 @@ app.use('/', tarefaRoutes);
 
 let server = null;
 if (require.main === module) {
-  const PORT = 3000;
+  //const PORT = 3000;
   server = app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
+    console.log(`Servidor rodando em http://${process.env.HOST}:${process.env.PORT}`);
   });
 }
 
