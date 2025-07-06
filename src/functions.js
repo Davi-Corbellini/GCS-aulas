@@ -1,4 +1,8 @@
 
+function getCurrentURL () {
+  return window.location.origin
+}
+
 function sendEmail(desc, acao) {
 
   const serviceId = "service_b9lcyl2"
@@ -116,7 +120,7 @@ async function exportarPDF() {
 
   async function carregarTarefas() {
   try {
-    const resposta = await fetch(`http://${process.env.APP_URL}/tarefas`);
+    const resposta = await fetch(`${getCurrentURL()}/tarefas`);
     const tarefas = await resposta.json();
     const tbody = document.querySelector("#tabelaTarefas tbody");
     tbody.innerHTML = ""; // limpa tabela atual
@@ -162,7 +166,7 @@ const confirmar = confirm(`Tem certeza que deseja excluir a tarefa ${id}?`);
 if (!confirmar) return;
 
 try {
-  const resposta = await fetch(`http://${process.env.APP_URL}/tarefas/${id}`, {
+  const resposta = await fetch(`${getCurrentURL()}/tarefas/${id}`, {
     method: 'DELETE'
   });
 
@@ -195,7 +199,7 @@ const situacao = document.getElementById("situacao").value;
 // Adiciona hora para se adequar ao tipo DATETIME do MySQL
 const data_prevista = `${dataInput} 00:00:00`;
 
-const resposta = await fetch(`http://${process.env.APP_URL}/tarefas`, {
+const resposta = await fetch(`${getCurrentURL()}/tarefas`, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -245,7 +249,7 @@ async function obterTarefaPorId(id) {
   try {
     console.log("ID da tarefa no fetch:", id);
 
-    const resposta = await fetch(`http://${process.env.APP_URL}/tarefas/${id}`);
+    const resposta = await fetch(`${getCurrentURL()}/tarefas/${id}`);
     console.log(resposta)
 
     if (!resposta.ok) {
@@ -268,7 +272,7 @@ async function salvarEdicao() {
   const dataPrevista = document.getElementById("data-prevista-edicao").value;
   const situacao = document.getElementById("situacao-edicao").value;
 
-  const resposta = await fetch(`http://${process.env.APP_URL}/tarefas/${tarefaAtualId}`, {
+  const resposta = await fetch(`${getCurrentURL()}/tarefas/${tarefaAtualId}`, {
     method: 'PUT',  // Usamos PUT para edição
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ descricao, data_prevista: dataPrevista, situacao })
