@@ -12,7 +12,7 @@
         http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
 
     <!-- Changeset para criação da tabela tarefa -->
-    <changeSet id="1-create-tarefa-table" author="eduardo">
+    <changeSet id="1-create-tarefa-table" author="davi">
         <createTable tableName="tarefa">
             <column name="id" type="INT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -37,7 +37,7 @@
     </changeSet>
 
     <!-- Changeset para criação da tabela usuario -->
-    <changeSet id="2-create-usuario-table" author="eduardo">
+    <changeSet id="2-create-usuario-table" author="davi">
         <createTable tableName="usuario">
             <column name="id" type="INT">
                 <constraints nullable="false"/>
@@ -51,7 +51,7 @@
     </changeSet>
 
     <!-- Changeset para inserir dados na tabela usuario -->
-    <changeSet id="3-insert-usuario" author="eduardo">
+    <changeSet id="3-insert-usuario" author="davi">
         <insert tableName="usuario">
             <column name="id" valueNumeric="1"/>
             <column name="nome" value="davi"/>

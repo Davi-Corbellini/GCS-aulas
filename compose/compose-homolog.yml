@@ -26,7 +26,7 @@ services:
       options: {}
     network_mode: "bridge"
     ports:
-      - "3001:3000/tcp"
+      - "3001:3001/tcp"
     user: "node"
     working_dir: "/usr/src/app"
 
