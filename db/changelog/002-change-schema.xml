@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+        http://www.liquibase.org/xml/ns/pro
+        http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd">
+
+    <!-- Changeset para criação da tabela teste -->
+    <changeSet id="1-create-teste-table" author="davi">
+            <sql> create table teste (id int not null auto_increment primary key, nome varchar(100) )</sql>
+        <rollback>
+            <dropTable tableName="teste"/>
+        </rollback>
+    </changeSet>
+
+    <!-- Changeset para inserir dados na tabela teste -->
+    <changeSet id="1-insert-teste" author="davi">
+            <sql> insert into teste values (1, 'TESTE DO LIQUIBASE') </sql>
+        <rollback>
+                <sql>delete from teste where id = 1</sql>
+        </rollback>
+
+    </changeSet>
+</databaseChangeLog>
